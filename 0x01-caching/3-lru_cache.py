@@ -35,5 +35,10 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """ Get an item by key """
-        return self.cache_data.get(key)
+        value = self.cache_data.get(key)
 
+        if value:
+            self.lru_list.remove(key)
+            self.lru_list.append(key)
+
+        return value
